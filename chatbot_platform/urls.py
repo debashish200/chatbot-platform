@@ -19,13 +19,19 @@ from django.urls import path,include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework.routers import DefaultRouter
 from projects.views import ProjectViewSet
+from django.http import JsonResponse
 
 router = DefaultRouter()
 #router.register('projects', ProjectViewSet, basename='projects')
 
+
+def home(request):
+    return JsonResponse({"message": "Chatbot API is running"})
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path("", home),
     path('api/projects/', include('projects.urls')),
     path('api/users/', include('users.urls')),
     path('api/chat/', include('chats.urls')),
