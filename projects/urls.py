@@ -1,5 +1,9 @@
-from django.urls import path
-from .views import PromptViewSet
+from rest_framework.routers import DefaultRouter
+from django.urls import path, include
+from .views import ProjectViewSet, PromptViewSet
+
+router = DefaultRouter()
+router.register(r'projects', ProjectViewSet, basename='project')
 
 prompt_list = PromptViewSet.as_view({
     'get': 'list',
@@ -7,5 +11,6 @@ prompt_list = PromptViewSet.as_view({
 })
 
 urlpatterns = [
-    path('<int:project_id>/prompts/', prompt_list, name='project-prompts'),
+    path('', include(router.urls)),
+    path('projects/<int:project_id>/prompts/', prompt_list, name='project-prompts'),
 ]
