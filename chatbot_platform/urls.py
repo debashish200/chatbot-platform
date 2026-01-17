@@ -33,7 +33,7 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path("", home),
     path('api/projects/', include('projects.urls')),
-    path('api/users/', include('users.urls')),
+    path('api/auth/', include('users.urls')),
     path('api/chat/', include('chats.urls')),
     path('api/token/', TokenObtainPairView.as_view()),
     path('api/token/refresh/', TokenRefreshView.as_view()),
